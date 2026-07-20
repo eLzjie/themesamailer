@@ -1,4 +1,5 @@
 import { MARKET } from "@/lib/market";
+import Reveal from "./Reveal";
 
 export default function Pricing() {
   return (
@@ -14,7 +15,7 @@ export default function Pricing() {
         </div>
 
         <div className="pricing-grid">
-          <div className="tier-card">
+          <Reveal className="tier-card">
             <span className="tier-badge standard">Standard Slot</span>
             <p className="tier-name">A regular panel on the card.</p>
             <div className="tier-price">
@@ -30,9 +31,9 @@ export default function Pricing() {
               <li><span className="tf-check">✓</span>Standard card position</li>
             </ul>
             <a href="#contact" className="tier-cta secondary">Reserve a Standard Slot →</a>
-          </div>
+          </Reveal>
 
-          <div className="tier-card featured">
+          <Reveal className="tier-card featured" delay={0.08}>
             <span className="tier-badge special">Special Slot</span>
             <p className="tier-name">A featured, larger panel in prime position.</p>
             <div className="tier-price">
@@ -48,7 +49,7 @@ export default function Pricing() {
               <li><span className="tf-check">✓</span>Only 2 Special Slots available (of 12)</li>
             </ul>
             <a href="#contact" className="tier-cta primary">Reserve a Special Slot →</a>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

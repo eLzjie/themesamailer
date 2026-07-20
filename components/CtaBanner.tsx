@@ -1,8 +1,10 @@
+import Reveal from "./Reveal";
+
 export default function CtaBanner() {
   return (
     <section className="section alt section-cta" aria-label="Call to action">
       <div className="container">
-        <div className="cta-inner">
+        <Reveal className="cta-inner">
           <p className="eyebrow">Limited to 12 businesses</p>
           <h2 className="cta-hl">Reserve before your competitor does.</h2>
           <p className="cta-sub">
@@ -13,7 +15,7 @@ export default function CtaBanner() {
             <a href="#contact" className="btn-primary">Reserve Your Category →</a>
             <a href="#pricing" className="btn-ghost">Review Pricing</a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

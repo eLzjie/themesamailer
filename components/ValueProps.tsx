@@ -1,4 +1,5 @@
 import { MARKET } from "@/lib/market";
+import Reveal from "./Reveal";
 
 const FEATURES = [
   {
@@ -28,7 +29,7 @@ export default function ValueProps() {
     <section className="section alt" id="why" aria-labelledby="value-hl">
       <div className="container">
         <div className="value-grid">
-          <div className="value-copy">
+          <Reveal className="value-copy">
             <p className="eyebrow">Why direct mail</p>
             <h2 className="section-hl" id="value-hl">Built to be saved. Not scrolled past.</h2>
             <p className="section-sub">
@@ -47,9 +48,9 @@ export default function ValueProps() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
-          <div className="stat-grid">
+          <Reveal className="stat-grid" delay={0.1}>
             <div className="stat-box">
               <div className="stat-num">{MARKET.homes}</div>
               <div className="stat-lbl">Homes reached</div>
@@ -70,7 +71,7 @@ export default function ValueProps() {
               <div className="stat-lbl">USPS routes</div>
               <div className="stat-note">Full-route EDDM — no cherry-picking, no gaps</div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

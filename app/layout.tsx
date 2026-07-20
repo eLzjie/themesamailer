@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Source_Serif_4, Inter, JetBrains_Mono } from "next/font/google";
 import { MARKET, BRAND } from "@/lib/market";
+import LoadingScreen from "@/components/LoadingScreen";
 import "./globals.css";
 
 const serif = Source_Serif_4({
@@ -47,7 +48,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${serif.variable} ${inter.variable} ${mono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LoadingScreen />
+        {children}
+      </body>
     </html>
   );
 }
