@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SLOTS, openCount } from "@/lib/slots";
+import CardMock from "./CardMock";
 
 function scrollToForm() {
   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -64,6 +65,10 @@ export default function SlotGrid() {
             <em>{open}</em> of 12 open<br />
             Updated {today || "—"}
           </div>
+        </div>
+
+        <div className="placements-card">
+          <CardMock />
         </div>
 
         <div className="slot-grid" ref={gridRef} role="list">

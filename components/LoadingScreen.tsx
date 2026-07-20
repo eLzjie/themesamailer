@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { BRAND } from "@/lib/market";
 
 /**
- * Envelope-opening loader. Plays once per tab session, then fades to reveal the
- * site. Skipped entirely for reduced-motion or on repeat visits within a session.
- * Not server-rendered (mounted gate), so no-JS users never get a stuck overlay.
+ * Envelope-opening loader. Plays on every page load / refresh, then fades to
+ * reveal the site. Skipped only for prefers-reduced-motion. Not server-rendered
+ * (mounted gate), so no-JS users never get a stuck overlay.
  */
 export default function LoadingScreen() {
   const [mounted, setMounted] = useState(false);
@@ -17,9 +17,7 @@ export default function LoadingScreen() {
     setMounted(true);
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const seen = sessionStorage.getItem("mm-loaded");
-
-    if (reduce || seen) {
+    if (reduce) {
       document.documentElement.classList.add("loaded");
       return;
     }
@@ -35,7 +33,6 @@ export default function LoadingScreen() {
     const toRemove = window.setTimeout(() => {
       setShow(false);
       document.body.style.overflow = "";
-      sessionStorage.setItem("mm-loaded", "1");
     }, 2700);
 
     return () => {
