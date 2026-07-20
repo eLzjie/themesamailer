@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title data-m="title">The Mailer Man — Mesa 85207</title>
+<meta name="description" data-m="meta-desc" content="5,000 Mesa homes. 12 local businesses. One shared postcard, mailed every month to ZIP 85207. One category per business — no competitors on the card." />
+<meta name="theme-color" content="#0C1510" />
+<meta property="og:type" content="website" />
+<meta property="og:title" data-m="og-title" content="The Mailer Man — Mesa 85207" />
+<meta property="og:description" data-m="og-desc" content="One postcard. 5,000 homes. 12 businesses. One per category." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --night:    #0C1510;
+  --surface:  #141F18;
+  --surface2: #1B2A20;
+  --surface3: #22342A;
+  --cream:    #EBE5DC;      
+  --cream-dim:#96A89E;
+  --cream-faint: rgba(235,229,220,0.35);
+  --sage:     #52A877;
+  --sage-dim: #2D6045;
+  --clay:     #C45638;
+  --clay-dim: #8C3D27;
+  --gold:     #C49A52;
+  --border:       rgba(82,168,119,0.12);
+  --border-mid:   rgba(82,168,119,0.22);
+  --border-strong:rgba(82,168,119,0.42);
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', 'Courier New', monospace;
+  --max-w: 1160px;
+  --r-sm: 3px;
+  --r-md: 6px;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--night);
+  color: var(--cream);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+::selection { background: var(--sage-dim); color: var(--cream); }
+:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+/* ── UTILITIES ── */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s, border-bottom-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(12,21,16,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
+}
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--cream);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-link {
+  font-size: 14px;
+  color: var(--cream-dim);
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--cream); }
+.nav-cta {
+  background: var(--clay);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: var(--r-sm);
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--clay-dim); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 32px 96px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 65% at 72% 18%, rgba(47,90,71,0.2) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 80px;
+  align-items: center;
+}
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.hero-stat {
+  font-family: var(--mono);
+  font-size: clamp(72px, 10vw, 112px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--cream);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 80px rgba(82,168,119,0.12);
+}
+.hero-stat em {
+  color: var(--gold);
+  font-style: normal;
+}
+.hero-hl {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.22;
+  color: var(--cream);
+  text-wrap: balance;
+  max-width: 520px;
+}
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--cream-dim);
+  max-width: 460px;
+}
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  border: 1px solid var(--border-mid);
+  padding: 5px 12px;
+  border-radius: 100px;
+}
+.pill-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--sage);
+  flex-shrink: 0;
+}
+.pill-dot.clay { background: var(--clay); }
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--clay);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px 28px;
+  border-radius: var(--r-sm);
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--clay-dim); transform: translateY(-1px); }
+.btn-ghost {
+  color: var(--cream-dim);
+  font-size: 15px;
+  padding: 13px 22px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-sm);
+  display: inline-block;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--cream); border-color: var(--border-strong); }
+
+/* ── CARD MOCK ── */
+.hero-card-wrap { position: relative; }
+.card-mock {
+  background: var(--surface2);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: 0 32px 72px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3);
+  aspect-ratio: 11/7;
+  display: flex;
+  flex-direction: column;
+}
+.card-mock-side-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  padding: 6px 10px 0;
+  text-align: right;
+}
+.card-mock-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+.card-mock-bottom {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 1px;
+  background: var(--border);
+}
+.cms {
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 3px;
+}
+.cms.special-bg { background: rgba(196,86,56,0.07); }
+.cms-cat {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.cms-tier {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.cms-tier.special { color: var(--clay); }
+.cms-tier.standard { color: var(--sage); }
+.card-mock-strip {
+  background: var(--sage-dim);
+  padding: 5px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.cms-brand {
+  font-family: var(--serif);
+  font-size: 9px;
+  font-style: italic;
+  color: rgba(235,229,220,0.9);
+}
+.cms-zip {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(235,229,220,0.45);
+}
+.card-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 12px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+}
+.legend-dot.special { background: var(--clay); opacity: 0.65; }
+.legend-dot.standard { background: var(--sage); opacity: 0.65; }
+
+/* ── SECTION: VALUE ── */
+.section-value {
+  padding: 112px 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.value-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.value-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.section-hl {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.5vw, 38px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--cream);
+  text-wrap: balance;
+}
+.section-sub {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--cream-dim);
+  max-width: 440px;
+}
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.feature-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.feature-icon {
+  width: 34px; height: 34px;
+  border-radius: var(--r-sm);
+  background: rgba(82,168,119,0.09);
+  border: 1px solid var(--border-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 15px;
+}
+.feature-body h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 3px;
+}
+.feature-body p {
+  font-size: 14px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.stat-box {
+  background: var(--night);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.stat-num {
+  font-family: var(--mono);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.stat-lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.stat-note {
+  font-size: 13px;
+  color: var(--cream-faint);
+  line-height: 1.5;
+}
+
+/* ── SECTION: PRICING ── */
+.section-pricing {
+  padding: 112px 0;
+  border-top: 1px solid var(--border);
+}
+.pricing-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.tier-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: border-color 0.2s;
+}
+.tier-card.featured {
+  border-color: rgba(196,86,56,0.3);
+  background: rgba(196,86,56,0.04);
+}
+.tier-card:hover { border-color: var(--border-strong); }
+.tier-card.featured:hover { border-color: var(--clay); }
+.tier-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  width: fit-content;
+}
+.tier-badge.special { color: var(--clay); border: 1px solid rgba(196,86,56,0.35); }
+.tier-badge.standard { color: var(--sage); border: 1px solid rgba(82,168,119,0.35); }
+.tier-name {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.2;
+}
+.tier-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.tier-amount {
+  font-family: var(--mono);
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.tier-price-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.tier-divider { height: 1px; background: var(--border); }
+.tier-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tier-features li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--cream-dim);
+  line-height: 1.5;
+}
+.tf-check {
+  color: var(--sage);
+  font-family: var(--mono);
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.tier-cta {
+  display: block;
+  text-align: center;
+  padding: 13px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--r-sm);
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: auto;
+}
+.tier-cta.primary { background: var(--clay); color: #fff; }
+.tier-cta.primary:hover { background: var(--clay-dim); }
+.tier-cta.secondary {
+  border: 1px solid var(--border-mid);
+  color: var(--cream-dim);
+}
+.tier-cta.secondary:hover { border-color: var(--border-strong); color: var(--cream); }
+
+/* ── SECTION: SLOTS ── */
+.section-slots {
+  padding: 112px 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.slots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.slots-hl {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  text-wrap: balance;
+}
+.slots-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-align: right;
+}
+.slots-meta em { color: var(--sage); font-style: normal; }
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.slot-card {
+  background: var(--night);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: border-color 0.2s, background 0.2s,
+              transform 0.4s cubic-bezier(0.25,0.1,0.25,1),
+              opacity 0.4s ease,
+              box-shadow 0.3s;
+}
+.slot-card.visible {
+  opacity: 1;
+  transform: none;
+}
+.slot-card[data-tier="special"] {
+  grid-column: span 2;
+  border-color: rgba(196,86,56,0.18);
+}
+.slot-card.open:hover {
+  border-color: var(--border-strong);
+  background: var(--surface2);
+  transform: translateY(-3px);
+}
+.slot-card[data-tier="special"].open:hover { border-color: var(--clay); }
+.slot-card.claimed { cursor: default; opacity: 0.45; }
+.slot-tier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.slot-tier-pip {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stp-special .slot-tier-pip { background: var(--clay); }
+.stp-special { color: var(--clay); }
+.stp-standard .slot-tier-pip { background: var(--sage); }
+.stp-standard { color: var(--sage); }
+.slot-category {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.2;
+}
+.slot-card[data-tier="special"] .slot-category { font-size: 23px; }
+.slot-description {
+  font-size: 13px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+  flex: 1;
+}
+.slot-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.slot-status {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+.slot-status.open {
+  color: var(--sage);
+  background: rgba(82,168,119,0.1);
+  border: 1px solid rgba(82,168,119,0.25);
+}
+.slot-status.claimed {
+  color: var(--cream-dim);
+  background: rgba(150,168,158,0.08);
+  border: 1px solid rgba(150,168,158,0.15);
+}
+.slot-price {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.slots-caption {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  text-align: right;
+}
+
+/* ── SECTION: HOW IT WORKS ── */
+.section-how {
+  padding: 112px 0;
+  border-top: 1px solid var(--border);
+}
+.how-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 56px;
+  max-width: 520px;
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.how-step {
+  background: var(--surface);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.how-step:hover { background: var(--surface2); }
+.how-n {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--sage);
+  text-transform: uppercase;
+}
+.how-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.3;
+}
+.how-body {
+  font-size: 14px;
+  color: var(--cream-dim);
+  line-height: 1.65;
+}
+
+/* ── SECTION: CTA BANNER ── */
+.section-cta {
+  padding: 112px 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+.section-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 90% at 50% 50%, rgba(47,90,71,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+.cta-hl {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 46px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  text-wrap: balance;
+  max-width: 580px;
+  line-height: 1.22;
+}
+.cta-sub {
+  font-size: 16px;
+  color: var(--cream-dim);
+  max-width: 420px;
+  line-height: 1.65;
+}
+
+/* ── SECTION: FAQ ── */
+.section-faq {
+  padding: 112px 0;
+  border-top: 1px solid var(--border);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.faq-aside h3 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.faq-aside p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--cream-dim);
+  line-height: 1.65;
+}
+.faq-list {
+  border-top: 1px solid var(--border);
+}
+details { border-bottom: 1px solid var(--border); }
+details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cream);
+  user-select: none;
+  transition: color 0.2s;
+}
+details summary:hover { color: var(--cream); }
+details summary::-webkit-details-marker { display: none; }
+details summary::after {
+  content: "+";
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--sage);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+  line-height: 1;
+}
+details[open] summary::after { transform: rotate(45deg); }
+.faq-ans {
+  padding: 0 0 20px;
+  font-size: 15px;
+  color: var(--cream-dim);
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+/* ── SECTION: FORM ── */
+.section-form {
+  padding: 112px 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.form-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.form-copy {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.form-copy h2 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.form-copy p {
+  font-size: 15px;
+  color: var(--cream-dim);
+  line-height: 1.65;
+}
+.form-note {
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--sage);
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+}
+.form-note strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+.form-embed {
+  background: var(--night);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+/* ── FOOTER ── */
+.footer {
+  padding: 64px 0 32px;
+  border-top: 1px solid var(--border);
+}
+.footer-main {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+.footer-brand-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.footer-brand-tag {
+  font-size: 13px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+}
+.footer-col h5 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a {
+  font-size: 14px;
+  color: var(--cream-dim);
+  transition: color 0.2s;
+}
+.footer-col ul a:hover { color: var(--cream); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy { font-size: 12px; color: var(--cream-faint); }
+.footer-permit {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes special-glow {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(196,86,56,0.08), 0 1px 4px rgba(0,0,0,0.25);
+  }
+  50% {
+    box-shadow: 0 10px 48px rgba(196,86,56,0.28), 0 4px 14px rgba(0,0,0,0.45);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .fade-up:nth-child(2) { transition-delay: 0.07s; }
+  .fade-up:nth-child(3) { transition-delay: 0.14s; }
+  .fade-up:nth-child(4) { transition-delay: 0.21s; }
+
+  .slot-card[data-tier="special"].open.visible {
+    animation: special-glow 3.5s ease-in-out infinite;
+  }
+  .slot-card[data-tier="special"].open.visible:hover {
+    animation-play-state: paused;
+  }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-card-wrap { max-width: 440px; }
+  .value-grid { grid-template-columns: 1fr; }
+  .form-layout { grid-template-columns: 1fr; }
+  .form-copy { position: static; }
+  .footer-main { grid-template-columns: 1fr 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-aside { display: none; }
+}
+@media (max-width: 720px) {
+  .slot-grid { grid-template-columns: repeat(2, 1fr); }
+  .slot-card[data-tier="special"] { grid-column: span 2; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .how-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+@media (max-width: 480px) {
+  .slot-grid { grid-template-columns: 1fr; }
+  .slot-card[data-tier="special"] { grid-column: span 1; }
+  .how-grid { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr; }
+  .hero { padding: 100px 24px 72px; }
+  .container { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav-brand">The Mailer Man</a>
+  <nav class="nav-links" aria-label="Site navigation">
+    <a href="#placements" class="nav-link">Placements</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#contact" class="nav-cta">Reserve a Slot</a>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top" aria-label="Hero">
+  <div class="hero-inner">
+
+    <div class="hero-text">
+      <p class="eyebrow" data-m="eyebrow">EDDM · ZIP 85207 · Mesa, AZ</p>
+      <div class="hero-stat" aria-label="5,000 homes">
+        <em data-m="homes">5,000</em>
+      </div>
+      <h1 class="hero-hl">Mesa homes. One card. Your business in every mailbox.</h1>
+      <p class="hero-sub">A shared postcard mailed once a month to every home in <span data-m="zip">85207</span>. Twelve local businesses, one per category — no competitors on the card.</p>
+      <div class="hero-pills">
+        <span class="pill"><span class="pill-dot"></span><span data-m="homes">5,000</span> homes reached</span>
+        <span class="pill"><span class="pill-dot"></span>ZIP <span data-m="zip">85207</span> exclusive</span>
+        <span class="pill"><span class="pill-dot clay"></span>1 business per category</span>
+        <span class="pill"><span class="pill-dot"></span>Avg income <span data-m="avg-income">$125,000</span></span>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Reserve Your Category →</a>
+        <a href="#placements" class="btn-ghost">See Open Slots</a>
+      </div>
+    </div>
+
+    <div class="hero-card-wrap">
+      <div class="card-mock" role="img" aria-label="Postcard slot layout preview">
+        <p class="card-mock-side-label">Advertising side · 6 of 12 slots shown</p>
+        <div class="card-mock-grid">
+          <div class="cms special-bg">
+            <span class="cms-cat">HVAC</span>
+            <span class="cms-tier special">Special</span>
+          </div>
+          <div class="cms">
+            <span class="cms-cat">Plumbing</span>
+            <span class="cms-tier standard">Standard</span>
+          </div>
+          <div class="cms">
+            <span class="cms-cat">Pest Control</span>
+            <span class="cms-tier standard">Standard</span>
+          </div>
+        </div>
+        <div class="card-mock-strip">
+          <span class="cms-brand">The Mailer Man</span>
+          <span class="cms-zip" data-m="city-state-zip">Mesa · 85207 · AZ</span>
+        </div>
+        <div class="card-mock-bottom">
+          <div class="cms">
+            <span class="cms-cat">Pool</span>
+            <span class="cms-tier standard">Standard</span>
+          </div>
+          <div class="cms">
+            <span class="cms-cat">Dental</span>
+            <span class="cms-tier standard">Standard</span>
+          </div>
+          <div class="cms special-bg">
+            <span class="cms-cat">Roofing</span>
+            <span class="cms-tier special">Special</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-legend">
+        <div class="legend-item"><div class="legend-dot special"></div>Special — $500</div>
+        <div class="legend-item"><div class="legend-dot standard"></div>Standard — $300</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── VALUE PROP ── -->
+<section class="section-value" id="why" aria-labelledby="value-hl">
+  <div class="container">
+    <div class="value-grid">
+
+      <div class="value-copy">
+        <p class="eyebrow">Why direct mail</p>
+        <h2 class="section-hl" id="value-hl">Built to be saved. Not scrolled past.</h2>
+        <p class="section-sub">A postcard in the hand is worth a thousand impressions on a screen. People keep mail. They put it on the fridge. They call the number two weeks later.</p>
+        <ul class="feature-list">
+          <li class="feature-item">
+            <div class="feature-icon">✉</div>
+            <div class="feature-body">
+              <h4>Physical mail that gets opened</h4>
+              <p>98% of people check their mail daily. USPS EDDM delivers to every door — no list to buy, no algorithm to fight.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">$</div>
+            <div class="feature-body">
+              <h4>A premium ZIP at a shared cost</h4>
+              <p><span data-m="zip">85207</span> has an avg household income of <span data-m="avg-income">$125,000</span>. Reaching it solo would cost thousands. Shared, it's <span id="cost-per-slot-feature">under $500</span>.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-body">
+              <h4>One business per category</h4>
+              <p>Your HVAC company is the only HVAC company on the card. No bidding wars, no side-by-side comparisons — just your name.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-body">
+              <h4>We handle everything</h4>
+              <p>Design, printing, and USPS mailing are all included. You send us your logo and offer, we do the rest.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-num" data-m="homes">5,000</div>
+          <div class="stat-lbl">Homes reached</div>
+          <div class="stat-note">Every residential delivery point in ZIP <span data-m="zip">85207</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">12</div>
+          <div class="stat-lbl">Slots total</div>
+          <div class="stat-note">6 per card face, two tiers — Special and Standard</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-m="avg-income">$125k</div>
+          <div class="stat-lbl">Avg household income</div>
+          <div class="stat-note">Las Sendas, Red Mountain Ranch, and surrounding <span data-m="zip">85207</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-m="routes">6</div>
+          <div class="stat-lbl">USPS routes</div>
+          <div class="stat-note">Full-route EDDM — no cherry-picking, no gaps</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="section-pricing" id="pricing" aria-labelledby="pricing-hl">
+  <div class="container">
+    <div class="pricing-header">
+      <p class="eyebrow">Placement tiers</p>
+      <h2 class="section-hl" id="pricing-hl" style="font-size:clamp(24px,3.5vw,38px);">Choose your placement.</h2>
+      <p style="font-size:16px;color:var(--cream-dim);max-width:480px;text-align:center;line-height:1.65;">Every slot includes professional ad design, printing, and USPS EDDM delivery to <span data-m="homes">5,000</span> Mesa homes.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="tier-card">
+        <span class="tier-badge standard">Standard Slot</span>
+        <p class="tier-name">Regular panel on the card.</p>
+        <div class="tier-price">
+          <span class="tier-amount">$300</span>
+          <span class="tier-price-label">per mailing</span>
+        </div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li><span class="tf-check">✓</span>Your category, exclusively yours</li>
+          <li><span class="tf-check">✓</span>Professional ad design included</li>
+          <li><span class="tf-check">✓</span>QR code to any URL you choose</li>
+          <li><span class="tf-check">✓</span>USPS EDDM delivery to 5,000 homes</li>
+          <li><span class="tf-check">✓</span>Standard card position</li>
+        </ul>
+        <a href="#contact" class="tier-cta secondary">Reserve a Standard Slot →</a>
+      </div>
+
+      <div class="tier-card featured">
+        <span class="tier-badge special">Special Slot</span>
+        <p class="tier-name">Featured, larger panel. Prime position.</p>
+        <div class="tier-price">
+          <span class="tier-amount">$500</span>
+          <span class="tier-price-label">per mailing</span>
+        </div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li><span class="tf-check">✓</span>Everything in Standard</li>
+          <li><span class="tf-check">✓</span>Double-wide panel — more visual space</li>
+          <li><span class="tf-check">✓</span>Corner placement, highest visibility</li>
+          <li><span class="tf-check">✓</span>First impression on card face</li>
+          <li><span class="tf-check">✓</span>Only 2 Special Slots available (of 12)</li>
+        </ul>
+        <a href="#contact" class="tier-cta primary">Reserve a Special Slot →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SLOT GRID ── -->
+<section class="section-slots" id="placements" aria-labelledby="slots-hl">
+  <div class="container">
+    <div class="slots-header">
+      <div>
+        <p class="eyebrow" style="margin-bottom:8px;">Available placements</p>
+        <h2 class="slots-hl" id="slots-hl">12 categories. One per business.</h2>
+      </div>
+      <div class="slots-meta">
+        <span id="slots-open-count">—</span> of 12 open<br>
+        Updated <span id="slots-date">—</span>
+      </div>
+    </div>
+    <div class="slot-grid" id="slot-grid" role="list">
+      <!-- JS rendered -->
+    </div>
+    <p class="slots-caption">Click any open slot to reserve it — one business per category, no exceptions.</p>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section-how" id="how" aria-labelledby="how-hl">
+  <div class="container">
+    <div class="how-intro">
+      <p class="eyebrow">The process</p>
+      <h2 class="section-hl" id="how-hl">From reservation to mailbox in four steps.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step fade-up">
+        <p class="how-n">Step 1</p>
+        <h3 class="how-title">Reserve your category.</h3>
+        <p class="how-body">Pick your niche from the 12 available slots. One business per category — once it's yours, no competitor can take it.</p>
+      </div>
+      <div class="how-step fade-up">
+        <p class="how-n">Step 2</p>
+        <h3 class="how-title">Send your info.</h3>
+        <p class="how-body">Your business name, logo, offer, and QR destination. That's it. We design the ad — no creative skills needed on your end.</p>
+      </div>
+      <div class="how-step fade-up">
+        <p class="how-n">Step 3</p>
+        <h3 class="how-title">We print and mail.</h3>
+        <p class="how-body">Professional printing, USPS EDDM postage, and full-route delivery to <span data-m="homes">5,000</span> homes in <span data-m="zip">85207</span>. Handled entirely by us.</p>
+      </div>
+      <div class="how-step fade-up">
+        <p class="how-n">Step 4</p>
+        <h3 class="how-title">Phones ring.</h3>
+        <p class="how-body">Every home in <span data-m="zip">85207</span> holds your card. Month after month, your name is in their house before they need your service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ── -->
+<section class="section-cta" aria-label="Call to action">
+  <div class="container">
+    <div class="cta-inner">
+      <p class="eyebrow">Limited to 12 businesses</p>
+      <h2 class="cta-hl">Reserve before your competitor does.</h2>
+      <p class="cta-sub">Slots are exclusive per category. Once HVAC is claimed, no other HVAC company gets on this card.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="#contact" class="btn-primary">Reserve Your Category →</a>
+        <a href="#pricing" class="btn-ghost">Review Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section-faq" id="faq" aria-labelledby="faq-hl">
+  <div class="container">
+    <div class="faq-grid">
+      <aside class="faq-aside">
+        <h3 id="faq-hl">Questions.</h3>
+        <p>If something isn't answered here, call or text Chase directly — we're a local operation, not a call center.</p>
+      </aside>
+      <div class="faq-list">
+        <details>
+          <summary>What is EDDM and how does it work?</summary>
+          <p class="faq-ans">Every Door Direct Mail (EDDM) is a USPS program that delivers to every residential address on a mail route — no mailing list required. We select all <span data-m="routes">6</span> routes in <span data-m="zip">85207</span> and USPS delivers the postcard to every household on those routes.</p>
+        </details>
+        <details>
+          <summary>How many businesses share the card?</summary>
+          <p class="faq-ans">Twelve total — six per card face. The card is double-sided: one side is all advertising slots, the other is the USPS mailing face with indicia and our branding. Every business gets a real panel, not a footer listing.</p>
+        </details>
+        <details>
+          <summary>What does "one business per category" mean exactly?</summary>
+          <p class="faq-ans">If you're an HVAC company and you reserve the HVAC slot, no other HVAC company can be on this card — ever, for any mailing. Your competition is locked out of the card as long as you renew your slot.</p>
+        </details>
+        <details>
+          <summary>What's included in the slot price?</summary>
+          <p class="faq-ans">Professional ad design, print-ready file production, commercial printing, USPS EDDM postage, and full delivery to <span data-m="homes">5,000</span> homes. The only thing not included is your logo, business info, and the offer you want to promote.</p>
+        </details>
+        <details>
+          <summary>What's the difference between Special and Standard slots?</summary>
+          <p class="faq-ans">Special Slots ($500) get a double-wide panel positioned at the outer corners of the card face — the first thing the eye lands on. There are only 2 Special Slots total. Standard Slots ($300) are regular-size panels in the interior of the layout. Both slots include the same design and mailing service.</p>
+        </details>
+        <details>
+          <summary>How long before my ad is in mailboxes?</summary>
+          <p class="faq-ans">Once all 12 slots are sold and design assets are submitted, allow 3–4 weeks for design, print production, and USPS processing. We send proofs for approval before anything goes to print.</p>
+        </details>
+        <details>
+          <summary>What if my category is already claimed?</summary>
+          <p class="faq-ans">Join the waitlist for that category — if the current holder doesn't renew, you're first in line. Or ask about our next card; we may expand to adjacent ZIP codes or run additional mailings.</p>
+        </details>
+        <details>
+          <summary>Can I lock in my slot for multiple mailings?</summary>
+          <p class="faq-ans">Yes, and it's the smart play. Businesses that appear consistently in a neighborhood build name recognition over time. Ask Chase about multi-mailing pricing when you reserve.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORM ── -->
+<section class="section-form" id="contact" aria-labelledby="form-hl">
+  <div class="container">
+    <div class="form-layout">
+
+      <div class="form-copy">
+        <p class="eyebrow">Reserve your slot</p>
+        <h2 id="form-hl">Ready to be in 5,000 Mesa homes?</h2>
+        <p>Fill out the form and Chase will reach out within one business day to confirm your category and walk through next steps.</p>
+        <div class="form-note">
+          <strong>Add your slot type.</strong> In the form, note whether you're interested in a Standard slot ($300) or Special slot ($500). Chase will confirm availability when he follows up.
+        </div>
+        <div class="form-note" style="border-left-color:var(--gold);">
+          <strong>One per category.</strong> Slots are first-come, first-served. Submitting this form holds your spot — it's not charged until both parties confirm.
+        </div>
+      </div>
+
+      <div class="form-embed">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/IXuoK42RfFXZIewFy6yg"
+          style="width:100%;border:none;min-height:820px;"
+          id="inline-IXuoK42RfFXZIewFy6yg"
+          data-layout='{"id":"INLINE"}'
+          data-trigger-type="alwaysShow"
+          data-activation-type="alwaysActivated"
+          data-deactivation-type="neverDeactivate"
+          data-form-name="Mailer Man"
+          data-height="960"
+          data-layout-iframe-id="inline-IXuoK42RfFXZIewFy6yg"
+          data-form-id="IXuoK42RfFXZIewFy6yg"
+          title="Reserve a Slot — The Mailer Man">
+        </iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <p class="footer-brand-name">The Mailer Man</p>
+        <p class="footer-brand-tag">EDDM shared-mail postcards for <span data-m="city">Mesa</span>, <span data-m="state">AZ</span>. Local reach, shared cost.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Placements</h5>
+        <ul>
+          <li><a href="#placements">Available Slots</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Reserve a Slot</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Information</h5>
+        <ul>
+          <li><a href="#why">Why Direct Mail</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+14805550100" id="footer-tel">(480) 555-0100</a></li>
+          <li><a href="#contact">Reserve a Slot</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© <span id="footer-year"></span> The Mailer Man · <span data-m="city">Mesa</span>, <span data-m="state">AZ</span> <span data-m="zip">85207</span></p>
+      <p class="footer-permit" data-m="permit">PERMIT #PENDING</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── MARKET CONFIG ── */
+const MARKET = {
+  city:          "Mesa",
+  state:         "AZ",
+  zip:           "85207",
+  neighborhoods: "Las Sendas, Red Mountain Ranch, and the rest of 85207",
+  homes:         "5,000",
+  routes:        "6",
+  avgIncome:     "$125,000",
+  cardNumber:    "001",
+  permit:        "PERMIT #PENDING",
+};
+
+const CHASE_PHONE     = "(480) 555-0100";
+const CHASE_PHONE_TEL = "+14805550100";
+
+/* ── SLOTS ── */
+const SLOTS = [
+  // ROW 1: Special(2col) + Std + Std
+  {
+    category: "HVAC",
+    tier: "special",
+    price: "$500",
+    status: "open",
+    businessName: "",
+    description: "Mesa summers hit hard — AC is essential year-round. Phones ring before systems break, and homeowners in 85207 don't shop price, they shop trust.",
+  },
+  {
+    category: "Plumbing",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "Hard water and aging pipes keep phones ringing. A high-income ZIP that expects fast, reliable service — and pays for it.",
+  },
+  {
+    category: "Pest Control",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "Scorpions, roof rats, termites — desert homes need ongoing protection. Monthly recurring revenue potential for the right operator.",
+  },
+  // ROW 2: Std × 4
+  {
+    category: "Pool Service",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "85207 is pool country. Nearly every home has one. Most owners want someone else to clean it — this is that market.",
+  },
+  {
+    category: "Dental",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "High-income households invest in preventive and elective dental care. Patients here are loyal when they find a dentist they trust.",
+  },
+  {
+    category: "Chiropractic",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "Heat, dehydration, golf injuries — desert living creates steady demand for body care. A card that stays on the fridge is a referral waiting to happen.",
+  },
+  {
+    category: "Tax & Accounting",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "Affluent ZIP means complex returns. 85207 residents want a local expert they can call — not a chain. Name recognition matters in this category.",
+  },
+  // ROW 3: Std + Std + Special(2col)
+  {
+    category: "Landscaping",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "85207 homeowners pay to maintain curb appeal. Landscaping is a recurring, loyal contract — and direct mail reaches the decision-maker at home.",
+  },
+  {
+    category: "Real Estate",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "High turnover in premium neighborhoods. Agents need name recognition before the listing call — this card keeps you in 5,000 households.",
+  },
+  {
+    category: "Roofing",
+    tier: "special",
+    price: "$500",
+    status: "open",
+    businessName: "",
+    description: "Monsoon season plus desert heat makes roofing one of the highest-demand trades in the Valley. A Special Slot puts you first in front of 5,000 homeowners.",
+  },
+  // ROW 4: Std + Std
+  {
+    category: "Home Services",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "Electrical, painting, flooring, handyman — homeowners in this ZIP upgrade, not just maintain. High-ticket jobs, recurring work.",
+  },
+  {
+    category: "Attorneys",
+    tier: "standard",
+    price: "$300",
+    status: "open",
+    businessName: "",
+    description: "Estate planning, real estate transactions, family law — the same affluent demographic that buys homes in Las Sendas also needs legal services.",
+  },
+];
+
+/* ── RENDER MARKET TOKENS ── */
+const TOKEN_MAP = {
+  "city": MARKET.city,
+  "state": MARKET.state,
+  "zip": MARKET.zip,
+  "homes": MARKET.homes,
+  "routes": MARKET.routes,
+  "avg-income": MARKET.avgIncome,
+  "permit": MARKET.permit,
+  "city-state-zip": `${MARKET.city} · ${MARKET.zip} · ${MARKET.state}`,
+  "eyebrow": `EDDM · ZIP ${MARKET.zip} · ${MARKET.city}, ${MARKET.state}`,
+  "og-title": `The Mailer Man — ${MARKET.city} ${MARKET.zip}`,
+  "og-desc": `One postcard. ${MARKET.homes} homes. 12 businesses. One per category. ${MARKET.zip}.`,
+  "meta-desc": `${MARKET.homes} ${MARKET.city} homes. 12 local businesses. One shared postcard, mailed every month to ZIP ${MARKET.zip}. One category per business — no competitors on the card.`,
+  "title": `The Mailer Man — ${MARKET.city} ${MARKET.zip}`,
+};
+
+document.querySelectorAll("[data-m]").forEach(el => {
+  const key = el.getAttribute("data-m");
+  if (!(key in TOKEN_MAP)) return;
+  const val = TOKEN_MAP[key];
+  if (el.tagName === "META") {
+    el.setAttribute("content", val);
+  } else if (el.tagName === "TITLE") {
+    el.textContent = val;
+  } else {
+    el.textContent = val;
+  }
+});
+
+/* ── RENDER SLOT GRID ── */
+function renderSlots() {
+  const grid = document.getElementById("slot-grid");
+  if (!grid) return;
+  let openCount = 0;
+
+  SLOTS.forEach((slot, idx) => {
+    const card = document.createElement("div");
+    card.className = `slot-card ${slot.status}`;
+    card.setAttribute("data-tier", slot.tier);
+    card.setAttribute("role", "listitem");
+    card.setAttribute("tabindex", slot.status === "open" ? "0" : "-1");
+    card.setAttribute("aria-label", `${slot.category} — ${slot.tier === "special" ? "Special Slot" : "Standard Slot"} — ${slot.status === "open" ? "Available at " + slot.price : "Claimed by " + slot.businessName}`);
+
+    // Stagger delay: each card 70ms later, capped at 420ms
+    card.style.transitionDelay = `${Math.min(idx * 0.07, 0.42)}s`;
+
+    const tierClass = slot.tier === "special" ? "stp-special" : "stp-standard";
+    const tierLabel = slot.tier === "special" ? "Special Slot" : "Standard Slot";
+
+    const statusLabel = slot.status === "open"
+      ? "Open"
+      : `Claimed · ${slot.businessName || "Reserved"}`;
+
+    card.innerHTML = `
+      <div class="slot-tier-pill ${tierClass}">
+        <span class="slot-tier-pip"></span>${tierLabel}
+      </div>
+      <div class="slot-category">${slot.category}</div>
+      <p class="slot-description">${slot.description}</p>
+      <div class="slot-foot">
+        <span class="slot-status ${slot.status}">${statusLabel}</span>
+        <span class="slot-price">${slot.status === "open" ? slot.price : "—"}</span>
+      </div>
+    `;
+
+    if (slot.status === "open") {
+      openCount++;
+      card.addEventListener("click", () => {
+        document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+      });
+      card.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    }
+
+    grid.appendChild(card);
+  });
+
+  // Observe cards into view (staggered entrance)
+  if ("IntersectionObserver" in window) {
+    const slotObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          // Clear stagger delay after it fires so hover transitions aren't laggy
+          setTimeout(() => { e.target.style.transitionDelay = "0s"; }, 900);
+          slotObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -32px 0px" });
+    grid.querySelectorAll(".slot-card").forEach(c => slotObs.observe(c));
+  } else {
+    // No observer support — show all immediately
+    grid.querySelectorAll(".slot-card").forEach(c => {
+      c.classList.add("visible");
+      c.style.transitionDelay = "0s";
+    });
+  }
+
+  // Update counts
+  const countEl = document.getElementById("slots-open-count");
+  if (countEl) { countEl.textContent = openCount; countEl.style.color = "var(--sage)"; }
+
+  const dateEl = document.getElementById("slots-date");
+  if (dateEl) {
+    const d = new Date();
+    dateEl.textContent = d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+}
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 60);
+}, { passive: true });
+
+/* ── INTERSECTION OBSERVER: FADE UP ── */
+const fadeEls = document.querySelectorAll(".fade-up");
+if (fadeEls.length && "IntersectionObserver" in window) {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  fadeEls.forEach(el => obs.observe(el));
+} else {
+  fadeEls.forEach(el => el.classList.add("visible"));
+}
+
+/* ── FOOTER ── */
+const footerTel = document.getElementById("footer-tel");
+if (footerTel) {
+  footerTel.textContent = CHASE_PHONE;
+  footerTel.setAttribute("href", `tel:${CHASE_PHONE_TEL}`);
+}
+document.getElementById("footer-year").textContent = new Date().getFullYear();
+
+/* ── INIT ── */
+renderSlots();
+</script>
+
+</body>
+</html>

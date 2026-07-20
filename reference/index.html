@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Mailer Man</title>
+<meta name="description" content="A monthly oversized postcard mailed to every premium home in one premium zip. Eight non-competing local businesses share it." />
+<meta name="theme-color" content="#FAF7F1" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://themesamailer.com" />
+<meta property="og:title" content="The Mailer Man" />
+<meta property="og:description" content="Eight non-competing local businesses share one oversized postcard mailed monthly to every premium home." />
+<meta property="og:site_name" content="The Mailer Man" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Mailer Man" />
+<meta name="twitter:description" content="Eight non-competing local businesses share one oversized postcard mailed monthly to every premium home." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+<style>
+/* ================================================================
+   THE MAILER MAN — design tokens
+================================================================ */
+:root{
+  --paper:        #FAF7F1;
+  --paper-shade:  #F2EDE3;
+  --ink:          #1B2420;
+  --ink-soft:     #4A5550;
+  --sage:         #2F5547;
+  --sage-deep:    #1F3D32;
+  --clay:         #B85436;   /* darkened from spec #C45E3F — 4.53:1 on paper, 4.84:1 white-on-clay */
+  --clay-hover:   #9D4429;
+  --gold:         #B68B4C;
+  --lock-grey:    #C7C2B7;
+
+  --radius-sm: 2px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --shadow-print: 0 1px 0 0 rgba(27,36,32,0.06), 0 8px 24px -8px rgba(27,36,32,0.08);
+  --shadow-lift:  0 1px 0 0 rgba(27,36,32,0.08), 0 16px 36px -12px rgba(27,36,32,0.18);
+
+  --gutter: clamp(20px, 4vw, 48px);
+  --ease-print: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ================================================================
+   reset
+================================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  margin:0;
+  font-family:'Inter','Helvetica Neue',Arial,sans-serif;
+  font-size:17px;
+  line-height:1.55;
+  color:var(--ink);
+  background-color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+/* paper grain — 120px tiled SVG noise at 4% */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  opacity:.04;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:120px 120px;
+}
+
+/* ================================================================
+   typography
+================================================================ */
+.mono{
+  font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-weight:500;
+  font-size:13px;
+  line-height:1.4;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--ink-soft);
+}
+.display-xl,.display-lg,.display-md,.display-sm{
+  font-family:'Source Serif 4',Georgia,'Times New Roman',serif;
+  font-weight:500;
+  color:var(--ink);
+  margin:0;
+}
+.display-xl{font-size:clamp(48px,7.4vw,72px);line-height:1.04;letter-spacing:-0.02em;font-variation-settings:"opsz" 144}
+.display-lg{font-size:clamp(38px,5.4vw,56px);line-height:1.05;letter-spacing:-0.015em;font-variation-settings:"opsz" 96}
+.display-md{font-size:clamp(28px,3.6vw,40px);line-height:1.1;font-variation-settings:"opsz" 60}
+.display-sm{font-size:clamp(22px,2.6vw,28px);line-height:1.18;font-variation-settings:"opsz" 36}
+
+.body-lg{font-size:clamp(17px,1.55vw,19px);line-height:1.55}
+.body-sm{font-size:15px;line-height:1.5}
+
+/* ================================================================
+   layout
+================================================================ */
+.container{
+  max-width:1240px;
+  margin:0 auto;
+  padding:0 var(--gutter);
+  position:relative;
+  z-index:2;
+}
+.container-narrow{ max-width:720px; }
+.container-mid{ max-width:880px; }
+
+.section{ padding: clamp(64px, 9vw, 120px) 0; position:relative; }
+.section-head{ margin-bottom: clamp(36px, 5vw, 56px); max-width: 720px; }
+.section-head .display-lg,
+.section-head .display-md{ margin: 0 0 14px; }
+.section-sub{ color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+/* ================================================================
+   focus + a11y
+================================================================ */
+:focus-visible{
+  outline:2px solid var(--sage);
+  outline-offset:2px;
+  border-radius:var(--radius-sm);
+}
+
+.skip{
+  position:absolute;
+  left:-9999px;top:0;
+  background:var(--ink);color:var(--paper);
+  padding:10px 14px;z-index:1000;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+}
+.skip:focus{left:12px;top:12px}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ================================================================
+   top nav — always visible, responsive
+================================================================ */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:50;
+  background: rgba(250,247,241,0.92);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid rgba(47,85,71,0.16);
+  transition: border-color 250ms var(--ease-print), box-shadow 250ms var(--ease-print);
+}
+.nav.is-scrolled{
+  box-shadow: 0 8px 24px -16px rgba(27,36,32,0.18);
+  border-bottom-color: rgba(47,85,71,0.28);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding: 14px var(--gutter);
+  max-width:1240px;margin:0 auto;
+}
+.nav-logo{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:500;font-size:18px;letter-spacing:-0.005em;
+  color:var(--sage);
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:9px;
+  flex-shrink:0;
+}
+.nav-logo::before{
+  content:"";width:7px;height:7px;background:var(--clay);
+  border-radius:1px;flex-shrink:0;
+}
+.nav-links{
+  display:flex;align-items:center;gap:28px;
+  list-style:none;padding:0;margin:0;
+}
+.nav-links a{
+  position:relative;
+  font-family:'Inter',sans-serif;font-weight:500;font-size:14px;
+  color:var(--ink-soft);text-decoration:none;
+  padding: 4px 2px;
+  transition: color 160ms var(--ease-print);
+}
+.nav-links a::after{
+  content:"";position:absolute;
+  left:2px;right:2px;bottom:0;
+  height:1px;background:var(--clay);
+  transform: scaleX(0);transform-origin: center;
+  transition: transform 200ms var(--ease-print);
+}
+.nav-links a:hover{ color:var(--sage-deep); }
+.nav-links a:hover::after{ transform: scaleX(1); }
+@media (max-width: 820px){
+  .nav-links{ display:none; }
+}
+@media (max-width: 380px){
+  .nav-logo{ font-size:16px; }
+  .nav .btn-sm{ font-size:13px; padding:9px 13px; }
+}
+
+/* ================================================================
+   buttons
+================================================================ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1;
+  padding:15px 22px;border-radius:var(--radius-sm);
+  text-decoration:none;border:1px solid transparent;
+  cursor:pointer;white-space:nowrap;
+  transition: transform 180ms var(--ease-print), background-color 180ms var(--ease-print),
+              border-color 180ms var(--ease-print), box-shadow 180ms var(--ease-print),
+              color 180ms var(--ease-print);
+}
+.btn-primary{
+  background:var(--clay);color:#FFFFFF;
+  box-shadow: 0 1px 0 rgba(27,36,32,0.10), inset 0 -2px 0 rgba(0,0,0,0.14);
+}
+.btn-primary:hover{
+  background:var(--clay-hover);transform:translateY(-1px);
+  box-shadow: 0 3px 0 rgba(27,36,32,0.10), inset 0 -2px 0 rgba(0,0,0,0.14);
+}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{ background:transparent; color:var(--ink); border-color:rgba(27,36,32,0.22); }
+.btn-secondary:hover{ border-color:var(--sage-deep); color:var(--sage-deep); transform:translateY(-1px); }
+.btn-sm{font-size:14px;padding:11px 16px}
+
+/* ================================================================
+   HERO (section 1)
+================================================================ */
+.hero{ padding: clamp(96px, 12vw, 152px) 0 clamp(72px, 12vw, 140px); position:relative; }
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.04fr) minmax(0,0.96fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items:center;
+}
+@media (max-width:900px){
+  .hero-grid{ grid-template-columns:1fr; gap:40px; }
+  /* card mock now follows the trust line on mobile — natural DOM order, no flip */
+}
+
+.hero-eyebrow{
+  margin-bottom:28px;display:inline-flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{ content:""; width:28px; height:1px; background:var(--clay); }
+
+.hero-headline{
+  font-family:'Source Serif 4',Georgia,serif;font-weight:500;
+  font-size:clamp(40px,6.4vw,72px);line-height:1.04;letter-spacing:-0.02em;
+  margin:0 0 28px;font-variation-settings:"opsz" 144;color:var(--ink);
+  max-width:14ch;
+}
+@media (max-width:900px){ .hero-headline{ max-width:none; } }
+
+.hero-sub{
+  font-size:clamp(17px,1.55vw,19px);line-height:1.55;
+  color:var(--ink-soft);max-width:54ch;margin:0 0 36px;
+}
+.hero-ctas{ display:flex;flex-wrap:wrap;gap:14px;margin-bottom:32px; }
+.hero-trust{
+  display:flex;align-items:center;gap:12px;
+  color:var(--ink-soft);font-size:14.5px;max-width:56ch;margin:0;
+}
+.hero-trust .dot{
+  width:8px;height:8px;border-radius:50%;background:var(--sage);
+  flex-shrink:0;box-shadow:0 0 0 3px rgba(47,85,71,0.15);
+}
+
+/* hero stats strip */
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;margin:0 0 28px;padding:14px 0;
+  border-top:1px solid rgba(74,85,80,0.22);
+  border-bottom:1px solid rgba(74,85,80,0.22);
+}
+.hero-stat{
+  display:flex;flex-direction:column;gap:4px;
+  padding:0 16px;
+  border-left:1px solid rgba(74,85,80,0.18);
+  margin:0;
+}
+.hero-stat:first-child{ border-left:0;padding-left:0; }
+.hero-stat:last-child{ padding-right:0; }
+.hero-stat-value{
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:500;
+  font-size:clamp(22px,2.4vw,26px);
+  line-height:1.1;color:var(--sage-deep);margin:0;
+}
+.hero-stat-label{
+  font-size:10px;letter-spacing:0.1em;color:var(--ink-soft);margin:0;
+}
+@media (max-width:520px){
+  .hero-stats{ grid-template-columns:1fr; }
+  .hero-stat{
+    flex-direction:row;justify-content:space-between;align-items:baseline;
+    padding:8px 0;border-left:0;
+    border-top:1px solid rgba(74,85,80,0.15);
+  }
+  .hero-stat:first-child{ border-top:0;padding-top:0; }
+  .hero-stat:last-child{ padding-bottom:0; }
+}
+
+/* hero entrance stagger */
+.hero-anim > *{ opacity:0; transform:translateY(14px); }
+.hero-anim.is-in > *{
+  opacity:1;transform:none;
+  transition: opacity 600ms var(--ease-print), transform 600ms var(--ease-print);
+}
+.hero-anim.is-in > *:nth-child(1){ transition-delay: 0ms; }
+.hero-anim.is-in > *:nth-child(2){ transition-delay: 100ms; }
+.hero-anim.is-in > *:nth-child(3){ transition-delay: 200ms; }
+.hero-anim.is-in > *:nth-child(4){ transition-delay: 300ms; }
+.hero-anim.is-in > *:nth-child(5){ transition-delay: 400ms; }
+.hero-anim.is-in > *:nth-child(6){ transition-delay: 500ms; }
+
+/* hero mini card mock */
+.card-mock{
+  position:relative;
+  background:var(--paper-shade);
+  border:1px solid rgba(27,36,32,0.10);
+  border-radius:var(--radius-md);
+  padding: 22px 22px 24px;
+  box-shadow:var(--shadow-print);
+  transform: rotate(-1.4deg) translateY(18px);
+  opacity:0;
+  aspect-ratio:11/7;
+  max-width:520px;width:100%;margin-left:auto;
+  display:flex;flex-direction:column;
+  transition: opacity 700ms var(--ease-print) 500ms, transform 700ms var(--ease-print) 500ms;
+}
+.hero-anim.is-in .card-mock{
+  opacity:1;
+  transform: rotate(-1.4deg) translateY(0);
+  animation: card-float 6s ease-in-out 1.4s infinite;
+}
+@keyframes card-float {
+  0%, 100% { transform: rotate(-1.4deg) translateY(0); }
+  50%      { transform: rotate(-1.4deg) translateY(-7px); }
+}
+@media (max-width:900px){ .card-mock{ margin:0 auto; max-width:440px; } }
+
+.card-mock-bleed{
+  position:absolute;inset:8px;
+  border:1px dashed rgba(27,36,32,0.13);
+  border-radius:4px;pointer-events:none;
+}
+.card-mock-top{
+  display:flex;justify-content:flex-end;
+  margin-bottom: 14px;
+  position:relative;
+}
+.card-mock-indicia{
+  border:1px solid var(--ink);
+  padding: 5px 9px 6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;line-height:1.4;
+  text-transform:uppercase;letter-spacing:0.04em;
+  color:var(--ink);text-align:center;min-width:96px;
+}
+.card-mock-indicia span{ display:block; }
+.card-mock-indicia .gold-line{
+  color:var(--gold);font-weight:500;letter-spacing:0.05em;
+  margin-top:2px;padding-top:2px;
+  border-top:1px solid rgba(182,139,76,0.4);
+}
+
+.card-mock-slots{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);
+  gap:5px;flex:1;min-height:120px;
+}
+.card-mock-slot{
+  background:var(--paper);
+  border:1px solid rgba(27,36,32,0.13);
+  border-radius:3px;
+  padding: 6px 7px;
+  display:flex;align-items:flex-end;
+  font-family:'JetBrains Mono',monospace;
+  font-size:8.5px;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--ink-soft);
+}
+
+.postmark{
+  position:absolute;top:38%;right:-18px;
+  width:74px;height:74px;
+  display:grid;place-items:center;
+  transform: rotate(-13deg);pointer-events:none;
+}
+.postmark-ring{ position:absolute;inset:0;border:1.4px solid var(--clay);border-radius:50%;opacity:0.85; }
+.postmark-ring::after{
+  content:"";position:absolute;inset:4px;
+  border:1px dashed var(--clay);border-radius:50%;opacity:0.55;
+}
+.postmark-text{
+  position:relative;text-align:center;
+  font-family:'JetBrains Mono',monospace;font-size:7px;
+  letter-spacing:0.1em;color:var(--clay);
+  text-transform:uppercase;line-height:1.45;
+}
+.postmark-text strong{ display:block;font-size:10px;letter-spacing:0.14em;color:var(--clay);font-weight:500;margin:1px 0; }
+
+.reg-mark{
+  position:absolute;bottom:10px;left:10px;
+  width:14px;height:14px;opacity:.42;pointer-events:none;
+}
+.reg-mark::before,.reg-mark::after{ content:"";position:absolute;background:var(--ink); }
+.reg-mark::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
+.reg-mark::after{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+
+/* ================================================================
+   SECTION 2 — The Card (slot grid)
+================================================================ */
+.section-cards{ padding-top: clamp(40px, 6vw, 80px); }
+.slot-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:14px;margin-bottom:28px;
+}
+@media (max-width:900px){ .slot-grid{ grid-template-columns:repeat(2,1fr); } }
+
+.slot{
+  position:relative;
+  background:var(--paper);
+  border:1px solid rgba(47,85,71,0.32);
+  border-radius:var(--radius-md);
+  padding: 22px 20px 18px;
+  display:flex;flex-direction:column;gap:14px;
+  text-align:left;cursor:pointer;
+  font-family:inherit;color:inherit;
+  transition: transform 200ms var(--ease-print), box-shadow 200ms var(--ease-print);
+  opacity:0;transform:translateY(12px);
+  min-height: 168px;
+  min-width: 0;          /* grid item must shrink to 1fr — overrides default min-width:auto */
+}
+.slot.is-in{
+  opacity:1;transform:translateY(0);
+  transition:
+    opacity 400ms var(--ease-print) var(--reveal-delay, 0ms),
+    transform 400ms var(--ease-print) var(--reveal-delay, 0ms),
+    box-shadow 200ms var(--ease-print);
+}
+.slot::before{
+  content:"";position:absolute;inset:-1px;
+  border:2px solid var(--sage-deep);
+  border-radius:var(--radius-md);
+  opacity:0;pointer-events:none;
+  transition: opacity 200ms ease;
+}
+.slot:hover{ transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.slot:hover::before{ opacity:1; }
+.slot:focus-visible{ outline:none; }
+.slot:focus-visible::before{ opacity:1; }
+
+.slot-cat{
+  color:var(--sage);
+  font-size:clamp(22px,2.4vw,28px);
+  line-height:1.15;
+  margin:0;
+  font-variation-settings:"opsz" 36;
+}
+.slot-desc{ color:var(--ink-soft);margin:0;flex:1;font-size:14px;line-height:1.5; }
+.slot-pill{
+  position:relative;align-self:flex-start;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:6px 12px;border:1px solid var(--sage);
+  color:var(--sage);border-radius:100px;white-space:nowrap;
+  min-height:26px;
+}
+.slot-pill .pill-default{ transition: opacity 200ms ease; }
+.slot-pill .pill-hover{
+  position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);
+  opacity:0;white-space:nowrap;transition: opacity 200ms ease;
+}
+.slot:hover .pill-default{ opacity:0; }
+.slot:hover .pill-hover{ opacity:1; }
+@media (max-width: 600px){
+  .slot{ padding: 18px 16px 16px; gap: 10px; min-height: 152px; }
+  .slot-cat{ font-size: 19px; overflow-wrap: break-word; }
+  .slot-desc{ font-size: 13.5px; }
+  .slot-pill{
+    align-self: stretch;                /* full-width button on mobile — no fight with cell */
+    font-size: 10px;
+    padding: 8px 10px;
+    letter-spacing: 0.07em;
+  }
+  .slot-pill .pill-default,
+  .slot-pill .pill-hover{ width: 100%; text-align: center; }
+}
+
+/* claimed state */
+.slot-claimed{
+  cursor:default;
+  border-color:var(--lock-grey);
+  background:var(--paper-shade);
+}
+.slot-claimed:hover{ transform:none; box-shadow:none; }
+.slot-claimed:hover::before{ opacity:0; }
+.slot-claimed .slot-cat{ color:var(--lock-grey); }
+.slot-claimed .slot-desc{ color:var(--lock-grey); }
+.slot-claimed .slot-pill{ border-color:var(--lock-grey); color:var(--lock-grey); }
+.slot-claimed .slot-pill .pill-default,
+.slot-claimed .slot-pill .pill-hover{ opacity:1; position:static; inset:auto; }
+.slot-claimed .slot-pill .pill-hover{ display:none; }
+
+.slot-grid-meta{
+  text-align:center;color:var(--ink-soft);
+  font-size:11.5px;letter-spacing:0.12em;
+  margin: 8px 0 0;
+}
+
+/* ================================================================
+   SECTION 3 — How It Works
+================================================================ */
+.section-how{
+  background:var(--paper-shade);
+  border-top:1px solid var(--sage);
+  border-bottom:1px solid var(--sage);
+}
+.how-list{ list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap: clamp(40px, 6vw, 72px); }
+.how-row{
+  display:grid;grid-template-columns: 110px 1fr;
+  gap: clamp(20px, 3vw, 48px);
+  align-items:start;
+}
+.how-num{
+  color:var(--gold);font-size:14px;letter-spacing:0.18em;
+  padding-top: 14px;border-top: 1px solid var(--gold);
+}
+.how-headline{ color:var(--sage-deep);margin: 0 0 12px;max-width:18ch; }
+.how-text{ color:var(--ink);margin:0;max-width:58ch;font-size:18px;line-height:1.55; }
+@media (max-width: 640px){
+  .how-row{ grid-template-columns: 1fr;gap:12px; }
+  .how-num{ padding-top: 10px; }
+}
+
+/* ================================================================
+   SECTION 4 — The Math (receipt)
+================================================================ */
+.receipt{
+  font-family:'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13.5px;line-height: 1.7;
+  color:var(--ink);
+  max-width: 560px;margin: 0 auto;
+  text-transform:uppercase;letter-spacing:0.05em;
+}
+.receipt-line{ display:flex;justify-content:space-between;gap:16px;padding: 4px 0; }
+.receipt-title{
+  font-size:12.5px;font-weight:500;letter-spacing:0.12em;
+  text-align:center;justify-content:center;color:var(--ink);
+  padding-bottom: 4px;
+}
+.rl-label{ color:var(--ink-soft); }
+.rl-value{ color:var(--ink);font-weight:500; }
+.receipt-rule{
+  border:0;border-top:1px solid var(--gold);
+  margin: 6px 0;
+}
+.receipt > *{ opacity:0;transform:translateY(4px);transition: opacity 500ms var(--ease-print), transform 500ms var(--ease-print); }
+.receipt.is-in > *{ opacity:1;transform:none; }
+
+.receipt-caption{
+  text-align:center;color:var(--ink-soft);
+  max-width: 58ch;margin: 28px auto 0;
+  opacity:0;transform:translateY(4px);
+  transition: opacity 500ms var(--ease-print), transform 500ms var(--ease-print);
+}
+.receipt-caption.is-in{ opacity:1;transform:none; }
+
+/* ================================================================
+   SECTION 5 — Who This Is For
+================================================================ */
+.who-list{
+  list-style:none;padding:0;margin: 0 0 28px;
+  border-top: 1px solid rgba(74,85,80,0.22);
+}
+.who-row{
+  display:grid;grid-template-columns: minmax(180px, 28%) 1fr;
+  align-items:baseline;gap: clamp(16px, 3vw, 36px);
+  padding: clamp(20px, 3vw, 26px) 0;
+  border-bottom:1px solid rgba(74,85,80,0.22);
+}
+.who-cat{ color:var(--sage);position:relative;font-variation-settings:"opsz" 36; }
+.who-cat::after{ content:" —";color:var(--ink-soft); }
+.who-desc{ color:var(--ink-soft);margin:0; }
+@media (max-width:640px){
+  .who-row{ grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
+  .who-cat::after{ content:""; }
+}
+.who-caption{ color:var(--gold);text-align:center;margin: 28px 0 0; }
+
+/* ================================================================
+   SECTION 6 — Lead Form
+================================================================ */
+.form-embed{ max-width: 600px;margin: 0 auto; }
+
+/* ================================================================
+   SECTION 7 — FAQ
+================================================================ */
+.faq-heading{ color: var(--sage);margin-bottom: 32px; }
+.faq-list{ border-top: 1px solid rgba(74,85,80,0.22); }
+.faq{ border-bottom: 1px solid rgba(74,85,80,0.22); }
+.faq-q{
+  list-style: none;cursor: pointer;
+  padding: var(--space-4) 0;
+  font-size: clamp(17px, 1.4vw, 19px);line-height: 1.4;font-weight: 500;
+  color: var(--ink);
+  display:flex;justify-content:space-between;align-items:center;gap: 16px;
+}
+.faq-q::-webkit-details-marker{ display:none; }
+.faq-q::marker{ display:none; }
+.faq-chevron{
+  flex-shrink:0;color: var(--sage);
+  transition: transform 200ms var(--ease-print);
+}
+.faq[open] .faq-chevron{ transform: rotate(90deg); }
+.faq-a{
+  padding: var(--space-3) 0 var(--space-4) 0;
+  color: var(--ink-soft);max-width: 70ch;
+  font-size: 17px;line-height: 1.55;
+}
+
+/* ================================================================
+   SECTION 8 — Footer
+================================================================ */
+.footer{
+  background: var(--paper-shade);
+  padding: clamp(56px, 8vw, 96px) 0 28px;
+  border-top: 1px solid rgba(74,85,80,0.2);
+  margin-top: 16px;
+}
+.footer-grid{
+  display: grid;grid-template-columns: 1.4fr 1fr 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  margin-bottom: 48px;
+}
+@media (max-width: 720px){ .footer-grid{ grid-template-columns: 1fr; gap: 36px; } }
+
+.footer-logo{ color: var(--sage);margin: 0 0 10px;font-family:'Source Serif 4',Georgia,serif;font-weight:500;font-size:24px;letter-spacing:-0.01em; }
+.footer-tag{ color: var(--ink-soft);margin: 0;max-width: 36ch; }
+.footer-tag em{ font-style: italic; }
+
+.footer-label{ margin-bottom: 14px; }
+.footer-list{ list-style:none;padding:0;margin:0; }
+.footer-list li{ margin-bottom: 6px;font-size: 15px; }
+.footer-link{ color: var(--ink);text-decoration: none;border-bottom: 1px solid rgba(74,85,80,0.3);padding-bottom: 1px; }
+.footer-link:hover{ color: var(--sage-deep);border-bottom-color: var(--sage); }
+
+.footer-routes li{
+  color: var(--ink-soft);
+  font-family:'JetBrains Mono', monospace;
+  font-size: 12.5px;letter-spacing: 0.06em;text-transform: uppercase;
+}
+.footer-bar{
+  display:flex;justify-content:space-between;align-items:center;gap: 16px;
+  padding-top: 22px;border-top: 1px solid var(--sage);
+  font-size: 11px;
+}
+.footer-bar > div{ flex:0 1 auto; }
+.footer-bar-mid{ color: var(--gold);text-align:center;flex: 1 1 auto; }
+.footer-bar-right{ color: var(--gold); }
+@media (max-width: 720px){
+  .footer-bar{ flex-direction: column;align-items: flex-start;gap: 10px; }
+  .footer-bar-mid{ text-align:left; }
+}
+
+/* ================================================================
+   reduced motion
+================================================================ */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    animation-delay: 0ms !important;
+  }
+  .hero-anim > *{ opacity:0;transform:none; }
+  .hero-anim.is-in > *{ opacity:1;transition: opacity 100ms ease; }
+  .card-mock{ transform: rotate(-1.4deg);opacity:0; }
+  .hero-anim.is-in .card-mock{ opacity:1;transform: rotate(-1.4deg);transition: opacity 100ms ease;animation: none !important; }
+  .slot{ opacity:0;transform:none; }
+  .slot.is-in{ opacity:1;transition: opacity 100ms ease; }
+  .slot:hover{ transform:none; }
+  .receipt > *,.receipt-caption{ opacity:0;transform:none; }
+  .receipt.is-in > *,.receipt-caption.is-in{ opacity:1;transition: opacity 100ms ease; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="nav" id="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top" aria-label="The Mailer Man — home">The Mailer Man</a>
+    <ul class="nav-links" aria-label="Section navigation">
+      <li><a href="#the-card">The card</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#the-math">The math</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm" href="#lead-form">Claim your slot →</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       SECTION 1 — HERO
+  ============================================================ -->
+  <section class="hero" id="top" aria-labelledby="hero-headline">
+    <div class="container">
+      <div class="hero-grid">
+
+        <div class="hero-left hero-anim">
+          <div class="mono hero-eyebrow">EDDM · ZIP <span data-m="zip"></span> · <span data-m="homes"></span> HOMES</div>
+          <h1 class="hero-headline" id="hero-headline">Eight <span data-m="city"></span> businesses. One mailbox. The whole <span data-m="zip"></span>.</h1>
+          <p class="hero-sub">Once a month, one oversized postcard lands in every premium home in <span data-m="neighborhoods"></span>. Eight non-competing local businesses share it. All eight slots are open right now.</p>
+          <dl class="hero-stats" aria-label="The numbers">
+            <div class="hero-stat">
+              <dt class="hero-stat-label mono">Avg household income</dt>
+              <dd class="hero-stat-value" data-m="avg-income"></dd>
+            </div>
+            <div class="hero-stat">
+              <dt class="hero-stat-label mono">Direct-mail response</dt>
+              <dd class="hero-stat-value">3–5%</dd>
+            </div>
+            <div class="hero-stat">
+              <dt class="hero-stat-label mono">Cost per home</dt>
+              <dd class="hero-stat-value" data-m="cost-per-home"></dd>
+            </div>
+          </dl>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#lead-form">Claim your slot →</a>
+            <a class="btn btn-secondary" href="#the-card">See the card</a>
+          </div>
+          <p class="hero-trust">
+            <span class="dot" aria-hidden="true"></span>
+            <span>Built by <span data-m="city"></span> locals. First card mails when all eight slots are claimed.</span>
+          </p>
+        </div>
+
+        <div class="hero-right hero-anim">
+          <div class="card-mock" aria-hidden="true">
+            <div class="card-mock-bleed"></div>
+
+            <div class="card-mock-top">
+              <div class="card-mock-indicia">
+                <span>PRSRT STD</span>
+                <span>U.S. POSTAGE</span>
+                <span>PAID</span>
+                <span><span data-m="city-upper"></span> <span data-m="state-upper"></span></span>
+                <span class="gold-line" data-m="permit"></span>
+              </div>
+            </div>
+
+            <div class="card-mock-slots">
+              <div class="card-mock-slot">HVAC</div>
+              <div class="card-mock-slot">PLUMBING</div>
+              <div class="card-mock-slot">PEST</div>
+              <div class="card-mock-slot">POOL</div>
+              <div class="card-mock-slot">DENTAL</div>
+              <div class="card-mock-slot">CHIRO</div>
+              <div class="card-mock-slot">TAX</div>
+              <div class="card-mock-slot">ATTY</div>
+            </div>
+
+            <div class="postmark">
+              <div class="postmark-ring"></div>
+              <div class="postmark-text">
+                <span data-m="city-upper"></span> <span data-m="state-upper"></span>
+                <strong data-m="zip"></strong>
+                <span data-m="postmark-date"></span>
+              </div>
+            </div>
+
+            <div class="reg-mark"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — THE CARD (slot grid)
+  ============================================================ -->
+  <section class="section section-cards" id="the-card" aria-labelledby="card-heading">
+    <div class="container">
+      <header class="section-head">
+        <h2 class="display-lg" id="card-heading">This is the card. Pick your slot.</h2>
+        <p class="section-sub body-lg">One business per category. Once it's claimed, it's yours for the month. Hover any slot to see what it covers.</p>
+      </header>
+      <div class="slot-grid" id="slot-grid"></div>
+      <p class="slot-grid-meta mono" id="slot-grid-meta"></p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — HOW IT WORKS
+  ============================================================ -->
+  <section class="section section-how" id="how" aria-labelledby="how-heading">
+    <div class="container">
+      <h2 class="sr-only" id="how-heading">How it works</h2>
+      <ol class="how-list">
+
+        <li class="how-row">
+          <div class="how-num">01</div>
+          <div>
+            <h3 class="how-headline display-md">One slot. Yours alone.</h3>
+            <p class="how-text">We pick one business per category, period. The only HVAC company on the card is you. The only dentist on the card is you. That's the whole point.</p>
+          </div>
+        </li>
+
+        <li class="how-row">
+          <div class="how-num">02</div>
+          <div>
+            <h3 class="how-headline display-md">5,000 mailers. <span data-m="homes"></span> homes. ZIP <span data-m="zip"></span>.</h3>
+            <p class="how-text">We mail directly to every home in the premium routes of <span data-m="zip"></span> via USPS Every Door Direct Mail. The list isn't rented — it's the postal route. Same homes. Every month.</p>
+          </div>
+        </li>
+
+        <li class="how-row">
+          <div class="how-num">03</div>
+          <div>
+            <h3 class="how-headline display-md">You pay <span data-m="slot-price"></span>. We do the rest.</h3>
+            <p class="how-text">Design help included. Printing handled. Mailing handled. You hand us a logo and a phone number. The card lands. Your phone rings.</p>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — THE MATH
+  ============================================================ -->
+  <section class="section section-math" id="the-math" aria-labelledby="math-heading">
+    <div class="container container-narrow">
+      <h2 class="sr-only" id="math-heading">The math</h2>
+      <div class="receipt" id="receipt">
+        <div class="receipt-line receipt-title">THE MAILER MAN · CARD #<span data-m="card-number"></span> · <span data-m="zip"></span></div>
+        <hr class="receipt-rule" />
+        <div class="receipt-line"><span class="rl-label">HOMES MAILED</span><span class="rl-value" data-m="homes"></span></div>
+        <div class="receipt-line"><span class="rl-label">ROUTES</span><span class="rl-value" data-m="routes"></span></div>
+        <div class="receipt-line"><span class="rl-label">AVG HOUSEHOLD INCOME</span><span class="rl-value" data-m="avg-income"></span></div>
+        <div class="receipt-line"><span class="rl-label">EXCLUSIVE CATEGORY</span><span class="rl-value">YES</span></div>
+        <hr class="receipt-rule" />
+        <div class="receipt-line"><span class="rl-label">YOUR SLOT (LAUNCH PRICE)</span><span class="rl-value" data-m="slot-price"></span></div>
+        <div class="receipt-line"><span class="rl-label">COST PER HOME</span><span class="rl-value" data-m="cost-per-home"></span></div>
+        <hr class="receipt-rule" />
+      </div>
+      <p class="receipt-caption body-sm" id="receipt-caption">For the cost of one Google Ads click, your business sits in <span data-m="homes"></span> premium mailboxes for 30 days.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — WHO THIS IS FOR
+  ============================================================ -->
+  <section class="section section-who" id="who" aria-labelledby="who-heading">
+    <div class="container container-mid">
+      <header class="section-head">
+        <h2 class="display-lg" id="who-heading">Who this is for.</h2>
+      </header>
+      <ul class="who-list" id="who-list"></ul>
+      <p class="who-caption mono">Not on this list and you think you should be? Call us.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6 — LEAD FORM
+  ============================================================ -->
+  <section class="section section-form" id="lead-form" aria-labelledby="form-heading">
+    <div class="container container-narrow">
+      <header class="section-head" style="text-align:center;margin-left:auto;margin-right:auto;">
+        <h2 class="display-lg" id="form-heading">Hold your slot.</h2>
+        <p class="section-sub body-lg" style="margin-left:auto;margin-right:auto;">Tell us about your business. We'll call within 1 business day. No deposit at this step.</p>
+      </header>
+      <div class="form-embed">
+        <!-- GoHighLevel native form. Build/edit fields in GHL → Sites → Forms → "Mailer Man". -->
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/IXuoK42RfFXZIewFy6yg"
+          style="width:100%;border:none;min-height:820px;border-radius:var(--radius-md)"
+          id="inline-IXuoK42RfFXZIewFy6yg"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Mailer Man"
+          data-height="960"
+          data-layout-iframe-id="inline-IXuoK42RfFXZIewFy6yg"
+          data-form-id="IXuoK42RfFXZIewFy6yg"
+          title="Mailer Man">
+        </iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 7 — FAQ
+  ============================================================ -->
+  <section class="section section-faq" id="faq" aria-labelledby="faq-heading">
+    <div class="container container-mid">
+      <h2 class="display-md faq-heading" id="faq-heading">Questions.</h2>
+      <div class="faq-list">
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>What if my competitor claims the slot first?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">Your category is locked the moment you submit the form. We confirm within 1 business day. If someone else moves faster before we confirm, we'll tell you immediately — but it almost never happens on a first card.</div>
+        </details>
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>When does the first card mail?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">When all eight slots are claimed. We're not mailing a half-empty card. That's also why the launch price exists — to get the first card filled and prove the model.</div>
+        </details>
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>Can I see the homes you're mailing to?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">Yes. USPS publishes the EDDM route maps. We can walk you through exactly which streets are included in <span data-m="zip"></span>. Ask us on the call.</div>
+        </details>
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>What if my ad doesn't perform?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">Honestly, direct mail takes more than one send to build recognition. One card is a test. We'll tell you that upfront. We're not selling you a magic bullet — we're selling you the most affordable way to be in front of <span data-m="homes"></span> houses for 30 days.</div>
+        </details>
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>Do I have to commit to a year?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">No. Card #<span data-m="card-number"></span> is a one-time purchase. If you want to renew for the next card, we'll reach out before it fills. No contracts, no auto-billing.</div>
+        </details>
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>Who designs the ad?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">We do, at no extra charge. You give us a logo, a phone number, and a sentence about what you want people to do. We send you a proof. You approve it. Done.</div>
+        </details>
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>Is this connected to that Valpak/Money Mailer thing?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">No. Valpak and Money Mailer are national franchise operations mailing to 20,000+ homes with 20+ competing advertisers. We're local, we mail to one specific neighborhood, and you're the only one in your category. Different thing entirely.</div>
+        </details>
+
+        <details class="faq">
+          <summary class="faq-q">
+            <span>What's the catch?</span>
+            <svg class="faq-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 2 L10 7 L4 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-a">The card doesn't exist yet. Card #<span data-m="card-number"></span> only happens when all eight slots are claimed. That's the real answer. We're building this from zero, and we're being upfront about it.</div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     SECTION 8 — FOOTER
+============================================================ -->
+<footer class="footer" aria-labelledby="footer-heading">
+  <div class="container">
+    <h2 class="sr-only" id="footer-heading">Site footer</h2>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">The Mailer Man</div>
+        <p class="footer-tag body-sm"><em>Local advertising. Specific neighborhoods. Honest results.</em></p>
+      </div>
+      <div>
+        <div class="footer-label mono">Contact</div>
+        <ul class="footer-list">
+          <li><a class="footer-link" id="footer-phone-link" href="tel:+14805550100">(480) 555-0100</a></li>
+          <li><a class="footer-link" href="mailto:hello@themesamailer.com">hello@themesamailer.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-label mono">Current routes</div>
+        <ul class="footer-list footer-routes" id="footer-routes"></ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <div class="mono">© <span id="footer-year"></span> The Mailer Man</div>
+      <div class="footer-bar-mid mono" data-m="permit"></div>
+      <div class="footer-bar-right mono">Made in <span data-m="city-upper"></span>, <span data-m="state-upper"></span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   THE MAILER MAN — runtime
+   To launch a new market: edit MARKET. Nothing else.
+================================================================ */
+const MARKET = {
+  city:          "Mesa",
+  state:         "AZ",
+  zip:           "85207",
+  neighborhoods: "Las Sendas, Red Mountain Ranch, and the rest of 85207",
+  homes:         "5,000",
+  routes:        "6",
+  avgIncome:     "$125,000",
+  cardNumber:    "001",
+  permit:        "PERMIT #PENDING",
+  costPerHome:   "$0.051",
+  slotPrice:     "$250",
+  slotPriceReg:  "$295",
+};
+
+/* Sales contact — used in the recoverable error message */
+const CHASE_PHONE     = "(480) 555-0100";
+const CHASE_PHONE_TEL = "+14805550100";
+
+/* Slot inventory. To mark claimed: status:"claimed", businessName:"ABC Plumbing" */
+const SLOTS = [
+  { category: "HVAC",         description: `${MARKET.city} summers don't ask permission. Phones ring before they break.`,    status: "open", businessName: "" },
+  { category: "Plumbing",     description: "Hard water and old pipes don't go on vacation.",                                 status: "open", businessName: "" },
+  { category: "Pest Control", description: "Scorpions, roof rats, termites. Year-round demand.",                             status: "open", businessName: "" },
+  { category: "Pool Service", description: `Every house in ${MARKET.zip} has one. Most owners hate cleaning them.`,          status: "open", businessName: "" },
+  { category: "Dental",       description: `Discretionary spend, but ${MARKET.zip} has it.`,                                 status: "open", businessName: "" },
+  { category: "Chiropractic", description: "Heat, dehydration, golf injuries — pick your reason.",                           status: "open", businessName: "" },
+  { category: "Tax Pros",     description: "Affluent zip = complex returns. They need someone local.",                       status: "open", businessName: "" },
+  { category: "Attorneys",    description: "Estate planning, real estate, family. Same demographic, same need.",             status: "open", businessName: "" },
+];
+
+/* ================================================================
+   token fill
+================================================================ */
+const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+const today = new Date();
+const postmarkDate = `${MONTHS[today.getMonth()]} · ${today.getFullYear()}`;
+
+const tokens = {
+  "zip":            MARKET.zip,
+  "city":           MARKET.city,
+  "state":          MARKET.state,
+  "city-upper":     MARKET.city.toUpperCase(),
+  "state-upper":    MARKET.state.toUpperCase(),
+  "neighborhoods": MARKET.neighborhoods,
+  "homes":          MARKET.homes,
+  "routes":         MARKET.routes,
+  "avg-income":     MARKET.avgIncome,
+  "card-number":    MARKET.cardNumber,
+  "permit":         MARKET.permit,
+  "cost-per-home":  MARKET.costPerHome,
+  "slot-price":     MARKET.slotPrice,
+  "slot-price-reg": MARKET.slotPriceReg,
+  "postmark-date":  postmarkDate,
+};
+
+function fillMarketTokens(){
+  document.querySelectorAll('[data-m]').forEach(el => {
+    const key = el.getAttribute('data-m');
+    if (tokens[key] != null) el.textContent = tokens[key];
+  });
+}
+
+/* meta + title — also market-driven, in case crawlers run JS */
+function fillMeta(){
+  document.title = `The Mailer Man — Eight ${MARKET.city} businesses. One mailbox. ${MARKET.zip}.`;
+  const desc = `A monthly oversized postcard mailed to every premium home in ${MARKET.city} ${MARKET.zip} via USPS EDDM. Eight non-competing local businesses share it. All eight slots are open right now.`;
+  setMeta('name', 'description', desc);
+  setMeta('property', 'og:title', `The Mailer Man — Eight ${MARKET.city} businesses. One mailbox. ${MARKET.zip}.`);
+  setMeta('property', 'og:description', desc);
+  setMeta('name', 'twitter:title', `The Mailer Man — Eight ${MARKET.city} businesses. One mailbox. ${MARKET.zip}.`);
+  setMeta('name', 'twitter:description', desc);
+}
+function setMeta(attr, val, content){
+  const el = document.querySelector(`meta[${attr}="${val}"]`);
+  if (el) el.setAttribute('content', content);
+}
+
+/* ================================================================
+   slot grid — render + interactions
+================================================================ */
+function renderSlots(){
+  const grid = document.getElementById('slot-grid');
+  grid.innerHTML = '';
+  SLOTS.forEach((slot, i) => {
+    const isClaimed = slot.status === 'claimed';
+    const tag = isClaimed ? 'div' : 'button';
+    const el  = document.createElement(tag);
+    el.className = 'slot' + (isClaimed ? ' slot-claimed' : '');
+    el.style.setProperty('--reveal-delay', `${i * 60}ms`);
+    if (!isClaimed){
+      el.type = 'button';
+      el.dataset.category = slot.category;
+      el.setAttribute('aria-label', `Claim the ${slot.category} slot — open at ${MARKET.slotPrice} launch price`);
+    } else {
+      el.setAttribute('aria-disabled', 'true');
+    }
+    const pill = isClaimed
+      ? `<span class="slot-pill"><span class="pill-default">CLAIMED · ${escapeHtml(slot.businessName || '')}</span></span>`
+      : `<span class="slot-pill"><span class="pill-default">OPEN · ${MARKET.slotPrice} LAUNCH</span><span class="pill-hover">CLAIM →</span></span>`;
+    el.innerHTML = `
+      <h3 class="slot-cat display-sm">${escapeHtml(slot.category)}</h3>
+      <p class="slot-desc">${escapeHtml(slot.description)}</p>
+      ${pill}
+    `;
+    grid.appendChild(el);
+  });
+
+  /* meta caption */
+  const day   = today.getDate();
+  const month = MONTHS[today.getMonth()];
+  const year  = today.getFullYear();
+  const open  = SLOTS.filter(s => s.status === 'open').length;
+  document.getElementById('slot-grid-meta').textContent =
+    `LAST UPDATED · ${day} ${month} ${year} · ${open} of ${SLOTS.length} SLOTS OPEN`;
+
+  /* click → scroll to the form (GHL iframe can't be cross-origin pre-filled) */
+  grid.addEventListener('click', (e) => {
+    const slotEl = e.target.closest('.slot');
+    if (!slotEl || slotEl.classList.contains('slot-claimed')) return;
+    document.getElementById('lead-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function escapeHtml(s){
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+/* ================================================================
+   Section 5 — Who This Is For (driven by SLOTS)
+================================================================ */
+function renderWho(){
+  const list = document.getElementById('who-list');
+  list.innerHTML = '';
+  SLOTS.forEach(slot => {
+    const li = document.createElement('li');
+    li.className = 'who-row';
+    li.innerHTML = `<span class="who-cat display-sm">${escapeHtml(slot.category)}</span><span class="who-desc body-lg">${escapeHtml(slot.description)}</span>`;
+    list.appendChild(li);
+  });
+}
+
+/* ================================================================
+   Footer — phone link + route list + year
+================================================================ */
+function renderFooter(){
+  document.getElementById('footer-phone-link').setAttribute('href', 'tel:' + CHASE_PHONE_TEL);
+  document.getElementById('footer-phone-link').textContent = CHASE_PHONE;
+  document.getElementById('footer-year').textContent = today.getFullYear();
+  const routes = document.getElementById('footer-routes');
+  const n = parseInt(MARKET.routes, 10) || 0;
+  for (let i = 1; i <= n; i++){
+    const li = document.createElement('li');
+    li.textContent = `${MARKET.zip}-R${String(i).padStart(3, '0')}`;
+    routes.appendChild(li);
+  }
+}
+
+/* ================================================================
+   Observers — sticky nav, hero entrance, slot wave, receipt fade
+================================================================ */
+function setupObservers(){
+  /* nav: subtle shadow once page is scrolled (nav is always visible) */
+  const nav = document.getElementById('nav');
+  if (nav){
+    const setScrolled = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+    setScrolled();
+    window.addEventListener('scroll', setScrolled, { passive: true });
+  }
+
+  /* hero entrance */
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.hero-anim').forEach(b => b.classList.add('is-in'));
+    });
+  });
+
+  /* slot wave reveal */
+  if ('IntersectionObserver' in window){
+    const slotObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          e.target.classList.add('is-in');
+          slotObs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    document.querySelectorAll('.slot').forEach(s => slotObs.observe(s));
+  }
+
+  /* receipt line-by-line reveal */
+  const receipt = document.getElementById('receipt');
+  const caption = document.getElementById('receipt-caption');
+  if (receipt && 'IntersectionObserver' in window){
+    const lines = receipt.querySelectorAll(':scope > *');
+    lines.forEach((line, i) => line.style.transitionDelay = `${i * 80}ms`);
+    if (caption) caption.style.transitionDelay = `${lines.length * 80}ms`;
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          receipt.classList.add('is-in');
+          if (caption) caption.classList.add('is-in');
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.2 }).observe(receipt);
+  }
+}
+
+/* ================================================================
+   hero stat count-up
+================================================================ */
+function animateHeroStats(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.hero-stat-value').forEach(el => {
+    const final  = el.textContent.trim();
+    const parsed = parseStatNumber(final);
+    if (!parsed) return;                            /* ranges like "3–5%" parse to null → stay static */
+    countUp(el, parsed, final, 1300);
+  });
+}
+function parseStatNumber(s){
+  const m = s.match(/^([^\d.\-]*)(\d[\d,]*\.?\d*)([^\d.]*)$/);
+  if (!m) return null;
+  const raw   = m[2];
+  const value = parseFloat(raw.replace(/,/g, ''));
+  if (isNaN(value) || value === 0) return null;
+  const dec   = raw.includes('.') ? raw.split('.')[1].length : 0;
+  return { prefix: m[1], value, suffix: m[3], decimals: dec, hasCommas: raw.includes(',') };
+}
+function countUp(el, parsed, finalStr, duration){
+  const { prefix, value: target, suffix, decimals, hasCommas } = parsed;
+  const start = performance.now();
+  el.textContent = prefix + formatStat(0, decimals, hasCommas) + suffix;
+  function step(now){
+    const t = Math.min((now - start) / duration, 1);
+    const e = 1 - Math.pow(1 - t, 3);              /* ease-out cubic */
+    const cur = target * e;
+    el.textContent = prefix + formatStat(cur, decimals, hasCommas) + suffix;
+    if (t < 1) requestAnimationFrame(step);
+    else      el.textContent = finalStr;            /* snap to canonical formatted value */
+  }
+  requestAnimationFrame(step);
+}
+function formatStat(n, decimals, hasCommas){
+  if (decimals > 0) return n.toFixed(decimals);
+  return hasCommas ? Math.floor(n).toLocaleString() : String(Math.floor(n));
+}
+
+/* ================================================================
+   boot
+================================================================ */
+fillMeta();
+fillMarketTokens();
+renderSlots();
+renderWho();
+renderFooter();
+setupObservers();
+setTimeout(animateHeroStats, 600);                  /* fires as the stats row fades in (5th-child delay = 400ms) */
+</script>
+
+</body>
+</html>
