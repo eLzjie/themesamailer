@@ -536,7 +536,9 @@ img { max-width: 100%; display: block; }
 .form-note.clay { border-left-color: var(--clay); }
 .form-note strong { color: var(--ink); font-weight: 600; }
 .form-embed { background: var(--paper-3); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-card); }
-.form-embed iframe { display: block; width: 100%; border: none; min-height: 1093px; }
+/* min-height is only a pre-load floor; GHL's form_embed.js auto-resizes the
+   iframe to the real content height, so we must NOT clamp it tall here. */
+.form-embed iframe { display: block; width: 100%; border: none; min-height: 480px; }
 
 /* ── FOOTER ── */
 .footer { padding: 64px 0 32px; border-top: 1px solid var(--border); }

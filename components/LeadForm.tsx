@@ -40,7 +40,7 @@ export default function LeadForm() {
               data-deactivation-type="neverDeactivate"
               data-deactivation-value=""
               data-form-name="Mailer Form"
-              data-height="1093"
+              data-height="700"
               data-layout-iframe-id={iframeId}
               data-form-id={FORM_ID}
               title="Reserve a Slot — The Mesa Mailer"
